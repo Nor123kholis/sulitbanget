@@ -5,6 +5,6 @@
 
 	$query = mysqli_query($koneksi, "DELETE FROM produk WHERE id_produk = '$id_produk'");
 
-	header('location: ../../view/produk/index.php');
+	header('location: ../../views/produk/index.php');
 
  ?>

@@ -39,13 +39,12 @@ if (!isset($_SESSION["login"])) {
             <a class="dropdown-item" href="../../produk/index.php">Produk</a>
             <a class="dropdown-item" href="../../kategori/index.php">Kategori Produk</a>
             <a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-            <div class="dropdown-divider"></div>
           </div>
         </li>
         <li class="nav-item" style="padding-right: 15px;">
           <a class="nav-link" href="controller/koneksi.php">Cek koneksi</a>
-
         </li>
+        <a class="btn btn-primary" href="../../controller/pelanggan/logout.php">Logout</a>
       </ul>
     </form>
   </div>
@@ -59,16 +58,24 @@ if (!isset($_SESSION["login"])) {
  <br>
  <!-- strat form insert -->
  <form action="../../controller/Pelanggan/insert.php" method="post">
-  <div class="form-group row">
-    <label class="col-sm-2">Nama  </label>
-    <input type="text" name="nama_pelanggan" class="form-control col-sm-10" placeholder="masukkan nama ">
-    <label class="col-sm-2">alamat </label>
-    <textarea class="form-control" name="alamat"></textarea>
-    <p>Jenis Kelamin : 
-      <label><input type="radio" name="jenis_kelamin" value="L">Laki-laki</label>
-      <label><input type="radio" name="jenis_kelamin" value="P">Perempuan</label>
-    </p>  </div>
-  <button type="sumbit" name="submit" class="btn btn-success">SIMPAN</button>
+  <div class="form-group">
+    <label for="nama_pelanggan">Nama Pelanggan</label>
+    <input type="text" name="nama_pelanggan" class="form-control" placeholder="masukkan nama ">
+  </div>
+  <div class="form-group">
+    <label for="alamat">Alamat</label>
+    <input type="text" name="alamat" class="form-control" placeholder="masukkan nama ">
+  </div>
+  <div class="form-group">
+    <label for="jenis_kelamin">Jenis Kelamin</label>
+    <select class="custom-select" name="jenis_kelamin">
+      <option selected>-- Pilih Jenis Kelamin --</option>
+      <option value="L">Laki - Laki</option>
+      <option value="P">Perempuan</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Simpan</button>
 </form>
 <!-- finish form insert -->
 <!-- finish conten -->

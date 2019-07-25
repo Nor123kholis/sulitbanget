@@ -6,7 +6,7 @@ $query = "SELECT nama_produk, warna, merk.id_merk, nama_merk, beli.id_kategori, 
 
 $result = mysqli_fetch_array(mysqli_query($koneksi, $query));
 
-
+$produk = mysqli_query($koneksi, "SELECT nama_produk FROM produk");
 $categories = mysqli_query($koneksi, $categoriQuery);
 $merk = mysqli_query($koneksi, $merkQuery);
 ?>
@@ -40,13 +40,12 @@ $merk = mysqli_query($koneksi, $merkQuery);
               <a class="dropdown-item" href="../produk/index.php">Produk</a>
               <a class="dropdown-item" href="../kategori/index.php">Kategori Produk</a>
               <a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-              <div class="dropdown-divider"></div>
             </div>
           </li>
           <li class="nav-item" style="padding-right: 15px;">
             <a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
           </li>
+          <a class="btn btn-primary" href="../../controller/pelanggan/logout.php">Logout</a>
         </ul>
       </form>
     </div>
@@ -61,8 +60,13 @@ $merk = mysqli_query($koneksi, $merkQuery);
         <form action="update.php" method="post">
           <input type="hidden" name="id" value="<?= $id; ?>">
           <div class="form-group">
-            <label for="nama-produk">Nama Produk</label>
-            <input type="text" class="form-control form-control-sm" name="nama-produk" placeholder="Masukkan Nama Produk" value="<?= $result['nama_produk'] ?>">
+            <label for="nama-kategori">Nama Produk</label>
+            <select class="custom-select custom-select-sm" name="nama_produk">
+              <option>-- Pilih Produk --</option>
+              <?php foreach ($produk as $pdk) { ?>
+                <option value="<?= $pdk['nama_produk']; ?>" <?= ($pdk['nama_produk'] === $result['nama_produk']) ? 'selected' : ''; ?>> <?= $pdk['nama_produk']; ?> </option>
+              <?php } ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="nama-kategori">Nama Kategori</label>
@@ -85,14 +89,6 @@ $merk = mysqli_query($koneksi, $merkQuery);
                 <option value="<?= $v['id_merk']; ?>" <?= ($result['id_merk'] === $v['id_merk']) ? 'selected' : ''; ?>> <?= $v['nama_merk']; ?> </option>
               <?php } ?>
             </select>
-          </div>
-          <div class="form-group">
-            <label for="jumlah-produk">Jumlah Produk</label>
-            <input type="text" class="form-control form-control-sm" name="jumlah-produk" placeholder="Masukkan Jumlah Produk" value="<?= $result['jumlah'] ?>">
-          </div>
-          <div class="form-group">
-            <label for="harga-produk">Harga Produk</label>
-            <input type="text" class="form-control form-control-sm" name="harga-produk" placeholder="Masukkan Harga Produk" value="<?= $result['total_harga'] ?>">
           </div>
           <div class="form-group">
             <label for="harga-produk">Nama Pembeli</label>

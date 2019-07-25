@@ -41,12 +41,10 @@ if (!isset($_SESSION["login"])) {
 							<a class="dropdown-item" href="../produk/index.php">Produk</a>
 							<a class="dropdown-item" href="../kategori/index.php">Kategori Produk</a>
 							<a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-							<div class="dropdown-divider"></div>
 						</div>
 					</li>
 					<li class="nav-item" style="padding-right: 15px;">
 						<a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
 					</li>
 				</ul>
 			</form>
@@ -67,24 +65,25 @@ if (!isset($_SESSION["login"])) {
 					<th>warna</th>
 					<th>jumlah</th>
 					<th>harga</th>
-					<th>id merk</th>
-					<th>id kategori</th>
+					<th>merk</th>
+					<th>kategori</th>
 					<th>opsi</th>
 				</tr>
 			</thead>
 			<tbody class="text-capitalize">
 			<!-- PHP -->
 			<?php 
+				$no = 1;
 				$query = "SELECT id_produk, nama_produk, warna, jumlah, harga,merk.nama_merk, kategori_produk.nama_kategori, merk.id_merk, kategori_produk.id_kategori FROM produk 
 					INNER JOIN merk ON produk.id_merk = merk.id_merk 
 					INNER JOIN kategori_produk ON produk.id_kategori = kategori_produk.id_kategori";
 				$result = mysqli_query($koneksi, $query);
-				foreach ($result as $value) { ?>
-			<!-- PHP End-->
-
+			?>
+			<?php if (mysqli_num_rows($result) > 0) { ?>
+				<?php foreach ($result as $value) { ?>
 				<!-- Loop Konten -->
 				<tr>
-					<td><?= $value['id_produk'] ?></td>
+					<td><?= $no; ?></td>
 					<td><?= $value['nama_produk'] ?></td>
 					<td><?= $value['warna'] ?></td>
 					<td><?= $value['jumlah'] ?></td>
@@ -97,9 +96,12 @@ if (!isset($_SESSION["login"])) {
 					</td>
 				</tr>
 				<!-- Loop Konten End -->
-			<!-- PHP -->
+				<?php $no++; } ?>
+			<?php }else{ ?>
+				<tr>
+					<td colspan="8"><h4 class="text-center">Tidak Ada Produk!</h4></td>
+				</tr>
 			<?php } ?>
-			<!-- PHP End -->
 			</tbody>
 		</table>
 		<!-- Tabel End -->

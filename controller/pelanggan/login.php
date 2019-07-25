@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["login"])) {
-  header('Location:../../index.php');
-  exit;
-};
+
 include '../koneksi.php';
 if (isset($_POST['login']) ) {
   $username = $_POST['username'];
@@ -16,7 +13,7 @@ if (isset($_POST['login']) ) {
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row['password']) ) {
       $_SESSION["login"] = true;
-      header("Location:../../views/produk/index.php");
+      header("Location:../../index.php");
       exit;   
     }
 
@@ -61,7 +58,6 @@ if (isset($_POST['login']) ) {
           </li>
           <li class="nav-item" style="padding-right: 15px;">
             <a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
           </li>
         </ul>
       </form>

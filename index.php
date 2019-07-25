@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +38,6 @@
 							<a class="dropdown-item" href="views/produk/index.php">Produk</a>
 							<a class="dropdown-item" href="views/kategori/index.php">Kategori Produk</a>
 							<a class="dropdown-item" href="views/merk_produk/index.php">Merk Produk</a>
-							<div class="dropdown-divider"></div>
 						</div>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
@@ -44,7 +46,11 @@
 						<li class="nav-item" style="padding-right: 15px;">
 							<a class="nav-link" href="controller/koneksi.php">Cek koneksi</a>
 						</li>
-						<a class="btn btn-primary" href="controller/pelanggan/login.php">LOGIN</a>
+						<?php if (!isset($_SESSION["login"])){ ?>
+							<a class="btn btn-primary" href="controller/pelanggan/login.php">LOGIN</a>
+						<?php } else { ?>
+							<a class="btn btn-primary" href="controller/pelanggan/logout.php">Logout</a>
+						<?php } ?>
 					</ul>
 				</form>
 			</div>
@@ -77,12 +83,13 @@
 					INNER JOIN merk ON produk.id_merk = merk.id_merk 
 					INNER JOIN kategori_produk ON produk.id_kategori = kategori_produk.id_kategori";
 					$result = mysqli_query($koneksi, $query);
+					$no=1;
 					foreach ($result as $value) { ?>
 						<!-- PHP End-->
 
 						<!-- Loop Konten -->
 						<tr>
-							<td><?= $value['id_produk'] ?></td>
+							<td><?= $no++; ?></td>
 							<td><?= $value['nama_produk'] ?></td>
 							<td><?= $value['warna'] ?></td>
 							<td><?= $value['jumlah'] ?></td>

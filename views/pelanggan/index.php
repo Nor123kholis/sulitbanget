@@ -37,13 +37,12 @@ if (!isset($_SESSION["login"])) {
 							<a class="dropdown-item" href="../produk/index.php">Produk</a>
 							<a class="dropdown-item" href="../kategori/index.php">Kategori Produk</a>
 							<a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-							<div class="dropdown-divider"></div>
 						</div>
 					</li>
 					<li class="nav-item" style="padding-right: 15px;">
 						<a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
 					</li>
+					<a class="btn btn-primary" href="../../controller/pelanggan/logout.php">Logout</a>
 				</ul>
 			</form>
 		</div>
@@ -57,38 +56,47 @@ if (!isset($_SESSION["login"])) {
 		<br>
 		<a class="btn btn-primary" href="add.php">Tambah Data</a>
 		<br><br>
-	</div>
-	<!-- start tabel -->
-	<table class="table table-striped">
-		<tr>
-			<th>NO</th>
-			<th>NAMA</th>
-			<th>Alamat</th>
-			<th>Jenis Kelamin</th>
-			<th>AKSI</th>
-		</tr>
-		<?php 
-		include '../../controller/koneksi.php';
-		$query ="SELECT * FROM pelanggan";
-		$result = mysqli_query($koneksi,$query);
-		$row = mysqli_fetch_assoc($result);
-		$no=1;
-		foreach ($result as $row ) { ?>
+	<table class="table table-hover table-sm">
+		<thead class="bg-dark text-white">
 			<tr>
-				<td><?= $no++; ?></td>
-				<td><?= $row['nama_pelanggan']; ?></td>
-				<td><?= $row['alamat']; ?></td>
-				<td><?= $row['jenis_kelamin']; ?></td>
-				<td>
-					<a  href="edit.php?id_pelanggan=<?= $row['id_pelanggan']  ?>" class="btn btn-warning">Ubah</a>
-					<a  href="../../controller/pelanggan/delete.php?id_pelanggan=<?= $row['id_pelanggan']  ?>" class="btn btn-danger">DELETE</a>
+				<th>NO</th>
+				<th>NAMA</th>
+				<th>Alamat</th>
+				<th>Jenis Kelamin</th>
+				<th>AKSI</th>
+			</tr>
+		</thead>
+		<?php 
+			include '../../controller/koneksi.php';
+			$query ="SELECT * FROM pelanggan";
+			$result = mysqli_query($koneksi,$query);
+			$no=1;
+		?>
+		<?php if (mysqli_num_rows($result) > 0){ ?>
+			<?php foreach ($result as $row ) { ?>
+				<tr>
+					<td><?= $no++; ?></td>
+					<td><?= $row['nama_pelanggan']; ?></td>
+					<td><?= $row['alamat']; ?></td>
+					<td><?= ($row['jenis_kelamin'] === 'L') ? 'Laki - Laki' : 'Perempuan'; ?></td>
+					<td>
+						<a  href="edit.php?id_pelanggan=<?= $row['id_pelanggan']  ?>" class="btn btn-warning btn-sm">Ubah</a>
+						<a  href="../../controller/pelanggan/delete.php?id_pelanggan=<?= $row['id_pelanggan']  ?>" class="btn btn-danger btn-sm">Hapus</a>
 
+					</td>
+				</tr>
+			<?php } ?>
+		<?php }else{ ?>
+			<tr>
+				<td colspan="5">
+					<h4 class="text-center">Data Kosong!</h4>
 				</td>
 			</tr>
 		<?php } ?>
 
 	</table>
-	<!-- finish table -->
+	</div>
+
 	<!-- finish conten -->
 </body>
 </html>

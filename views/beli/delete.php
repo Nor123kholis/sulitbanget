@@ -5,6 +5,6 @@ echo $id_beli;
 
 $query = "DELETE FROM beli WHERE id_beli='$id_beli'";
 mysqli_query($koneksi,$query);
-header('Location:../../views/beli/trksucces.php');
+header('Location:../../views/beli/index.php');
 
- ?>ss
+ ?>

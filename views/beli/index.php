@@ -29,13 +29,12 @@
 							<a class="dropdown-item" href="../produk/index.php">Produk</a>
 							<a class="dropdown-item" href="../kategori/index.php">Kategori Produk</a>
 							<a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-							<div class="dropdown-divider"></div>
 						</div>
 					</li>
 					<li class="nav-item" style="padding-right: 15px;">
 						<a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
 					</li>
+					<a class="btn btn-primary" href="../../controller/pelanggan/logout.php">Logout</a>
 				</ul>
 			</form>
 		</div>
@@ -48,7 +47,7 @@
 		<hr>
 		<a href="../../index.php" class="btn btn-primary mb-2 text-right">Belanja Lagi</a>
 		<!-- Tabel -->
-		<table class="table table-bordered table-striped table-hover text-uppercase text-center">
+		<table class="table table-bordered table-hover text-uppercase text-center">
 			<thead class="thead-dark">
 				<tr>
 					<th>no</th>
@@ -66,7 +65,7 @@
 				<!-- PHP -->
 				<?php 
 				include '../../controller/koneksi.php';
-				$query = "SELECT id_beli,nama_produk, warna, total_harga, pembeli, merk.nama_merk, kategori_produk.nama_kategori, merk.id_merk, kategori_produk.id_kategori FROM beli 
+				$query = "SELECT id_beli, nama_produk, warna, total_harga, pembeli, merk.nama_merk, kategori_produk.nama_kategori, merk.id_merk, kategori_produk.id_kategori FROM beli 
 					INNER JOIN merk ON beli.id_merk = merk.id_merk 
 					INNER JOIN kategori_produk ON beli.id_kategori = kategori_produk.id_kategori"; // join data antara tabel transaksi => pelanggan => produk
 				$result = mysqli_query($koneksi, $query);
@@ -83,10 +82,10 @@
 						<td><?= $value['nama_merk'] ?></td>
 						<td><?= $value['total_harga'] ?></td>
 						<td><?= $value['pembeli'] ?></td>
-						<td class="btn btn-success">Dipesan</td>
+						<td><div class="badge badge-success p-2">Dipesan</div></td>
 						<td>
-							<a href="editpsn.php?id_beli=<?= $value['id_beli'] ?>" class="btn btn-warning">Ubah</a>
-							<a href="delete.php?id_beli=<?= $value['id_beli'] ?>" class="btn btn-danger">Hapus</a>
+							<a href="editpsn.php?id_beli=<?= $value['id_beli'] ?>" class="btn btn-warning btn-sm">Ubah</a>
+							<a href="delete.php?id_beli=<?= $value['id_beli'] ?>" class="btn btn-danger btn-sm">Hapus</a>
 						</td>
 					</tr>
 					<!-- Loop Konten End -->

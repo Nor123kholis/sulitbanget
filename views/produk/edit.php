@@ -44,13 +44,12 @@ $categoriQuery = "SELECT * FROM kategori_produk;";
 							<a class="dropdown-item" href="../produk/index.php">Produk</a>
 							<a class="dropdown-item" href="../kategori/index.php">Kategori Produk</a>
 							<a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-							<div class="dropdown-divider"></div>
 						</div>
 					</li>
 					<li class="nav-item" style="padding-right: 15px;">
 						<a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
 					</li>
+					<a class="btn btn-primary" href="../../controller/pelanggan/logout.php">Logout</a>
 				</ul>
 			</form>
 		</div>

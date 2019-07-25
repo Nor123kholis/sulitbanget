@@ -37,30 +37,26 @@ $merk = mysqli_query($koneksi, $merkQuery);
               <a class="dropdown-item" href="../produk/index.php">Produk</a>
               <a class="dropdown-item" href="../kategori/index.php">Kategori Produk</a>
               <a class="dropdown-item" href="../merk_produk/index.php">Merk Produk</a>
-              <div class="dropdown-divider"></div>
             </div>
           </li>
           <li class="nav-item" style="padding-right: 15px;">
             <a class="nav-link" href="../../controller/koneksi.php">Cek koneksi</a>
-
           </li>
+          <a class="btn btn-primary" href="../../controller/pelanggan/logout.php">Logout</a>
         </ul>
       </form>
     </div>
   </nav>
   <!--finish navbar-->
   <div class="container pt-5">
-    <h1> <center>Beli Produk</center></h1>
+    <h1> <center>Beli Produk <?= $result['nama_produk']; ?></center></h1>
     <hr /> <br />
     <!-- Form Add Merk Produk -->
     <div class="card">
       <div class="card-body">
         <form action="../../controller/transaksi/tuku.php" method="post">
           <input type="hidden" name="id" value="<?= $id; ?>">
-          <div class="form-group">
-            <label for="nama-produk">Nama Produk</label>
-            <input type="text" class="form-control form-control-sm" name="nama-produk" placeholder="Masukkan Nama Produk" value="<?= $result['nama_produk'] ?>">
-          </div>
+          <input type="hidden" name="nama_produk" value="<?= $result['nama_produk'] ?>">
           <div class="form-group">
             <label for="nama-kategori">Nama Kategori</label>
             <select class="custom-select custom-select-sm" name="kategori-produk">
